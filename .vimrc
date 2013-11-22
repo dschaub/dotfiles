@@ -10,9 +10,9 @@ set rtp+=~/.vim/bundle/vundle
 call vundle#rc()
 
 Bundle 'gmarik/vundle'
-Bundle 'scrooloose/nerdtree.git'
-Bundle 'kien/ctrlp.vim'
-Bundle 'ervandew/supertab'
+"Bundle 'scrooloose/nerdtree.git'
+"Bundle 'kien/ctrlp.vim'
+"Bundle 'ervandew/supertab'
 
 filetype plugin indent on
 
