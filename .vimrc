@@ -1,100 +1,266 @@
+" Setup vim
+" =========
+
+" use vim not vi
 set nocompatible
 
-colorscheme jellybeans
-set guifont=Monaco:h12
+" Plugin config
+" =============
+" setup Vundle for package management
 
-" need this for vundle
+" turn off filetype temporarily for vundle configuration
 filetype off
+set rtp+=~/.vim/bundle/Vundle.vim/
+call vundle#begin()
 
-set rtp+=~/.vim/bundle/vundle
-call vundle#rc()
+" let Vundle manage Vundle
+Plugin 'gmarik/Vundle.vim'
 
-Bundle 'gmarik/vundle'
-Bundle 'scrooloose/nerdtree.git'
-Bundle 'kien/ctrlp.vim'
-Bundle 'ervandew/supertab'
+" Themes
+"Plugin 'altercation/vim-colors-solarized'
 
+" git helpers, mostly useful for :GBlame
+Plugin 'tpope/vim-fugitive'
+" sexy stylish status line
+Plugin 'itchyny/lightline.vim'
+" shows git changes to the left of line numbers
+Plugin 'airblade/vim-gitgutter'
+" expand selections using + and -
+Plugin 'terryma/vim-expand-region'
+" semi-useful directory tree via F2
+Plugin 'scrooloose/nerdtree.git'
+" fuzzy search across all files in directory
+Plugin 'kien/ctrlp.vim'
+" smart search within all files
+Plugin 'rking/ag.vim'
+" comment and uncomment lines quickly
+Plugin 'scrooloose/nerdcommenter'
+" fast multi-cursor editing
+Plugin 'terryma/vim-multiple-cursors'
+" subl-like smart completion of braces
+Plugin 'Raimondi/delimitMate'
+" snips
+Plugin 'MarcWeber/vim-addon-mw-utils'
+Plugin 'tomtom/tlib_vim'
+Plugin 'garbas/vim-snipmate'
+Plugin 'honza/vim-snippets'
+" Gives smart completions for Javascript
+"Plugin 'marijnh/tern_for_vim'
+"Plugin 'Shougo/neocomplete.vim'
+" useful unix commands, move, remove, find, locate
+Plugin 'tpope/vim-eunuch'
+Plugin 'ReekenX/vim-rename2'
+Plugin 'thoughtbot/vim-rspec'
+
+" Syntax
+"Plugin 'jelera/vim-javascript-syntax'
+Plugin 'pangloss/vim-javascript'
+Plugin 'mxw/vim-jsx'
+Plugin 'elzr/vim-json'
+Plugin 'vim-ruby/vim-ruby'
+"Plugin 'tpope/vim-endwise'
+"Plugin 'skwp/vim-rspec'
+Plugin 'cakebaker/scss-syntax.vim'
+Plugin 'tpope/vim-markdown'
+Plugin 'tpope/vim-rails'
+Plugin 'mustache/vim-mustache-handlebars'
+Plugin 'editorconfig/editorconfig-vim'
+
+" Done configuring vundle
+call vundle#end()
+" re-enable filetypes now that vundle is configured
 filetype plugin indent on
 
-set wildignore+=*/node_modules/*,*.png,.DS_Store,.rspec,Gemfile.lock,*/.bundle/*,*/.git/*,*/.sass-cache/*,*/.tmp/*,*/.gradle/*,*/build/*
 
-" use OS clipboard
-set clipboard=unnamed
-" better command-line completion
-set wildmenu
-" optimize for fast terminal connections
-set ttyfast
-" add g (global) to search/replace by default
-set gdefault
-
-set encoding=utf-8 nobomb
-
-let mapleader=","
-
-set backupdir=~/.vim/backups
-set directory=~/.vim/swaps
-
-if exists("&undodir")
-	set undodir=~/.vim/undo
-endif
-
-" let vim settings be set in files
-set modeline
-set modelines=4
-
-" per-directory vimrc
-set exrc
-set secure
-
-" line numbers, syntax highlighting
-set number
+" Appearance
+" ==========
 syntax on
-set cursorline
-set nowrap
+syntax enable
+set t_Co=256
+set noshowmode
+colorscheme hybrid_reverse
 
-" set tab preferences
-set tabstop=4
-set expandtab
-set shiftwidth=4
-
-set hlsearch
-set ignorecase
-set incsearch
-
+" General Config
+" ==============
+let mapleader='\'
+set encoding=utf-8 nobomb
+" show line numbers
+set number
+" Allow backspace in insert mode
+set backspace=indent,eol,start
+" show incomplete commands at bottom
+set showcmd
+" reload files changed outside of vim
+set autoread
 " always show status line
 set laststatus=2
-set guioptions-=T
-
-" always allow mouse
-set mouse=a
-
+" allow buffers to exist in background
+set hidden
+" open vertical splits to the right
+set splitright
+" open horizontal splits on the bottom
+set splitbelow
+" optimize for fast terminal connections
+set ttyfast
+" disable error bells
 set noerrorbells
+" disable visual bells
 set visualbell t_vb=
+" don’t show the intro message when starting Vim
+" don't show "ATTENTION" warnings
+set shortmess=atIA
+" use the OS clipboard by default (on versions compiled with `+clipboard`)
+set clipboard=unnamed
+" Centralize backups, swapfiles and undo history
+silent !mkdir ~/.vim/backups > /dev/null 2>&1
+silent !mkdir ~/.vim/swaps > /dev/null 2>&1
+silent !mkdir ~/.vim/undo > /dev/null 2>&1
+set backupdir=~/.vim/backups
+set directory=~/.vim/swaps
+set undodir=~/.vim/undo
 
-set nostartofline
-set ruler
-set showmode
-set title
-set showcmd
+
+" Mouse Config
+" ============
+set mouse=a     " Enable mouse in all modes
+
+
+" Search Settings
+" ===============
+set incsearch        " Find the next match as we type the search
+set ignorecase       " ignore case of searches
+set gdefault         " Add the g flag to search/replace by default
+set hlsearch         " Highlight searches by default
+set viminfo='100,f1  " Save up to 100 marks, enable capital marks
+
+
+" Indentation and Display
+" =======================
+" We want to replace tabs with spaces and have 4 space width indentation
+set autoindent
+set smartindent
+set smarttab
+set shiftwidth=4
+set softtabstop=4
+set tabstop=4
+set expandtab
+set nowrap
+" Show “invisible” characters
+set lcs=tab:▸\ ,trail:·,nbsp:_
+set list
+
+set guifont=Menlo:h12
+set cursorline
+
+
+" Scrolling
+" =========
+" start scrolling three lines before the horizontal window border
 set scrolloff=3
 
-" don't show intro message
-set shortmess=atI
 
-" strip trailing whitespace
-function! StripWhitespace()
-    let save_cursor = getpos(".")
-    let old_query = getreg('/')
-    :%s/\s\+$//e
-    call setpos('.', save_cursor)
-    call setreg('/', old_query)
+" Completion
+" ==========
+set wildmode=longest,list,full
+set wildmenu                              " Enable ctrl-n and ctrl-p to scroll thru matches
+set wildignore=.DS_Store,*.o,*.obj,*~     " Stuff to ignore when tab completing
+set wildignore+=*/.bundle/*,*/.git/*
+set wildignore+=*/.sass-cache/*,*/tmp/*
+set wildignore+=*/.tmp/*,*/.gradle/*,*/build/*
+set wildignore+=*vim/backups*,argfile*,*/out/*
+set wildignore+=*coverage/*
+
+" Plugin config
+" =============
+
+" Neocomplete
+" Disable AutoComplPop.
+"let g:acp_enableAtStartup = 0
+" Use neocomplete.
+"let g:neocomplete#enable_at_startup = 1
+" Use smartcase.
+"let g:neocomplete#enable_smart_case = 1
+" Set minimum syntax keyword length.
+"let g:neocomplete#sources#syntax#min_keyword_length = 3
+"let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
+" <CR>: close popup and save indent.
+"inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+function! s:my_cr_function()
+  "return neocomplete#close_popup() . "\<CR>"
+  " For no inserting <CR> key.
+  return pumvisible() ? neocomplete#close_popup() : "\<CR>"
 endfunction
-noremap <leader>ss :call StripWhitespace()<CR>
-" Save a file as root (,W)
-noremap <leader>W :w !sudo tee % > /dev/null<CR>
+" <TAB>: completion.
+"inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+" <C-h>, <BS>: close popup and delete backword char.
+"inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
+"inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
+"inoremap <expr><C-y>  neocomplete#close_popup()
+"inoremap <expr><C-e>  neocomplete#cancel_popup()
 
-" Enable Tab to indent and shift+tab to unindent
-inoremap <TAB> <C-T>
-inoremap <S-TAB> <C-D>
+" ag search
+" bind K to grep word under cursor
+nnoremap K :Ag! "\b<C-R><C-W>\b"<CR>
+nnoremap <leader>f :Ag<space>
 
-map <F2> :NERDTreeToggle<CR>
+" lightline
+let g:lightline = {
+      \ 'colorscheme': 'wombat',
+      \ }
+
+" nerdtree
+let g:NERDTreeMapOpenVSplit = 'v'
+let g:NERDTreeMapOpenSplit = 's'
+let g:NERDTreeShowHidden = 1
+nnoremap <F2> :NERDTreeToggle<CR>
+nnoremap <F3> :NERDTreeFind<CR>
+
+" CtrlP
+" use ag for file listing
+let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+" ag is fast enough that CtrlP doesn't need to cache
+let g:ctrlp_use_caching = 0
+nnoremap <leader>p :CtrlP<CR>
+nnoremap <leader>t :CtrlPTag<CR>
+
+" Vim RSpec
+let g:rspec_runner = 'os_x_iterm'
+"map <Leader>t :call RunCurrentSpecFile()<CR>
+"map <Leader>t :call RunNearestSpec()<CR>
+"map <Leader>l :call RunLastSpec()<CR>
+"map <Leader>a :call RunAllSpecs()<CR>
+
+" Custom commands
+" ===============
+" tab navigation like a boss
+nmap th :tabprevious<CR>
+nmap tl :tabnext<CR>
+" faster saving
+nnoremap <leader>s :w<CR>
+" faster command entry
+nnoremap ; :
+" <Ctrl-l> redraws the screen and removes any search highlighting.
+nnoremap <silent> <C-l> :nohl<CR><C-l>
+
+" create a new file and open in a new tab
+" http://vimcasts.org/e/14
+nmap <leader>ew :e <C-R>=expand('%:h').'/'<CR>
+nmap <leader>es :sp <C-R>=expand('%:h').'/'<CR>
+nmap <leader>ev :vsp <C-R>=expand('%:h').'/'<CR>
+nmap <leader>et :tabe <C-R>=expand('%:h').'/'<CR>
+
+nmap <leader>f :CtrlP <C-R>=expand('%:h').'/'<CR>
+
+" remain in visual block mode after indent/outdent
+vnoremap < <gv
+vnoremap > >gv
+
+" automatically strip whitespace on save
+autocmd BufWritePre * :%s/\s\+$//e
+
+" Custom Formatting by filetype
+" =============================
+" Ruby
+autocmd BufRead,BufNewFile *.rb,*.rake,Rakefile,Gemfile,*.scss,*.jbuilder setlocal shiftwidth=2 tabstop=2
+autocmd FileType jbuilder setlocal shiftwidth=2 tabstop=2
+autocmd FileType yml setlocal shiftwidth=2 tabstop=2
