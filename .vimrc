@@ -30,7 +30,7 @@ Plugin 'terryma/vim-expand-region'
 " semi-useful directory tree via F2
 Plugin 'scrooloose/nerdtree.git'
 " fuzzy search across all files in directory
-Plugin 'kien/ctrlp.vim'
+Plugin 'ctrlpvim/ctrlp.vim'
 " smart search within all files
 Plugin 'rking/ag.vim'
 " comment and uncomment lines quickly
@@ -39,18 +39,10 @@ Plugin 'scrooloose/nerdcommenter'
 Plugin 'terryma/vim-multiple-cursors'
 " subl-like smart completion of braces
 Plugin 'Raimondi/delimitMate'
-" snips
-Plugin 'MarcWeber/vim-addon-mw-utils'
-Plugin 'tomtom/tlib_vim'
-Plugin 'garbas/vim-snipmate'
-Plugin 'honza/vim-snippets'
-" Gives smart completions for Javascript
-"Plugin 'marijnh/tern_for_vim'
 "Plugin 'Shougo/neocomplete.vim'
 " useful unix commands, move, remove, find, locate
 Plugin 'tpope/vim-eunuch'
 Plugin 'ReekenX/vim-rename2'
-Plugin 'thoughtbot/vim-rspec'
 
 " Syntax
 "Plugin 'jelera/vim-javascript-syntax'
@@ -58,8 +50,7 @@ Plugin 'pangloss/vim-javascript'
 Plugin 'mxw/vim-jsx'
 Plugin 'elzr/vim-json'
 Plugin 'vim-ruby/vim-ruby'
-"Plugin 'tpope/vim-endwise'
-"Plugin 'skwp/vim-rspec'
+Plugin 'tpope/vim-endwise'
 Plugin 'cakebaker/scss-syntax.vim'
 Plugin 'tpope/vim-markdown'
 Plugin 'tpope/vim-rails'
@@ -145,7 +136,7 @@ set softtabstop=4
 set tabstop=4
 set expandtab
 set nowrap
-" Show “invisible” characters
+" Show "invisible" characters
 set lcs=tab:▸\ ,trail:·,nbsp:_
 set list
 
@@ -223,13 +214,6 @@ let g:ctrlp_use_caching = 0
 nnoremap <leader>p :CtrlP<CR>
 nnoremap <leader>t :CtrlPTag<CR>
 
-" Vim RSpec
-let g:rspec_runner = 'os_x_iterm'
-"map <Leader>t :call RunCurrentSpecFile()<CR>
-"map <Leader>t :call RunNearestSpec()<CR>
-"map <Leader>l :call RunLastSpec()<CR>
-"map <Leader>a :call RunAllSpecs()<CR>
-
 " Custom commands
 " ===============
 " tab navigation like a boss
@@ -261,6 +245,6 @@ autocmd BufWritePre * :%s/\s\+$//e
 " Custom Formatting by filetype
 " =============================
 " Ruby
-autocmd BufRead,BufNewFile *.rb,*.rake,Rakefile,Gemfile,*.scss,*.jbuilder setlocal shiftwidth=2 tabstop=2
+autocmd BufRead,BufNewFile *.rb,*.rake,Rakefile,Gemfile,*.scss,*.jbuilder,*.yml setlocal shiftwidth=2 tabstop=2
 autocmd FileType jbuilder setlocal shiftwidth=2 tabstop=2
 autocmd FileType yml setlocal shiftwidth=2 tabstop=2
