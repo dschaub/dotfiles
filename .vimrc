@@ -25,6 +25,8 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'itchyny/lightline.vim'
 " shows git changes to the left of line numbers
 Plugin 'airblade/vim-gitgutter'
+" buffer manager
+Plugin 'jeetsukumaran/vim-buffergator'
 " expand selections using + and -
 Plugin 'terryma/vim-expand-region'
 " semi-useful directory tree via F2
@@ -33,8 +35,6 @@ Plugin 'scrooloose/nerdtree.git'
 Plugin 'ctrlpvim/ctrlp.vim'
 " smart search within all files
 Plugin 'rking/ag.vim'
-" comment and uncomment lines quickly
-Plugin 'scrooloose/nerdcommenter'
 " fast multi-cursor editing
 Plugin 'terryma/vim-multiple-cursors'
 " subl-like smart completion of braces
@@ -56,6 +56,7 @@ Plugin 'tpope/vim-markdown'
 Plugin 'tpope/vim-rails'
 Plugin 'mustache/vim-mustache-handlebars'
 Plugin 'editorconfig/editorconfig-vim'
+Plugin 'maksimr/vim-jsbeautify'
 
 " Done configuring vundle
 call vundle#end()
@@ -85,8 +86,6 @@ set showcmd
 set autoread
 " always show status line
 set laststatus=2
-" allow buffers to exist in background
-set hidden
 " open vertical splits to the right
 set splitright
 " open horizontal splits on the bottom
@@ -192,7 +191,8 @@ endfunction
 " ag search
 " bind K to grep word under cursor
 nnoremap K :Ag! "\b<C-R><C-W>\b"<CR>
-nnoremap <leader>f :Ag<space>
+" never open first result when searching with Ag
+ca Ag Ag!
 
 " lightline
 let g:lightline = {
@@ -206,7 +206,14 @@ let g:NERDTreeShowHidden = 1
 nnoremap <F2> :NERDTreeToggle<CR>
 nnoremap <F3> :NERDTreeFind<CR>
 
+" buffergator
+let g:buffergator_suppress_keymaps = 1
+nnoremap [b :BuffergatorMruCyclePrev<CR>
+nnoremap ]b :BuffergatorMruCycleNext<CR>
+nnoremap <leader>b :BuffergatorToggle<CR>
+
 " CtrlP
+let g:ctrlp_working_path_mode = 'a'
 " use ag for file listing
 let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 " ag is fast enough that CtrlP doesn't need to cache
@@ -238,6 +245,17 @@ nmap <leader>f :CtrlP <C-R>=expand('%:h').'/'<CR>
 " remain in visual block mode after indent/outdent
 vnoremap < <gv
 vnoremap > >gv
+
+" vp doesn't replace paste buffer
+function! RestoreRegister()
+  let @" = s:restore_reg
+  return ''
+endfunction
+function! s:Repl()
+  let s:restore_reg = @"
+  return "p@=RestoreRegister()\<cr>"
+endfunction
+vmap <silent> <expr> p <sid>Repl()
 
 " automatically strip whitespace on save
 autocmd BufWritePre * :%s/\s\+$//e
