@@ -33,6 +33,7 @@ Plugin 'terryma/vim-expand-region'
 Plugin 'scrooloose/nerdtree.git'
 " fuzzy search across all files in directory
 Plugin 'ctrlpvim/ctrlp.vim'
+Plugin 'JazzCore/ctrlp-cmatcher'
 " smart search within all files
 Plugin 'rking/ag.vim'
 " fast multi-cursor editing
@@ -213,6 +214,7 @@ nnoremap ]b :BuffergatorMruCycleNext<CR>
 nnoremap <leader>b :BuffergatorToggle<CR>
 
 " CtrlP
+let g:ctrlp_match_func = {'match' : 'matcher#cmatch'}
 let g:ctrlp_working_path_mode = 'a'
 " use ag for file listing
 let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
@@ -266,3 +268,10 @@ autocmd BufWritePre * :%s/\s\+$//e
 autocmd BufRead,BufNewFile *.rb,*.rake,Rakefile,Gemfile,*.scss,*.jbuilder,*.yml setlocal shiftwidth=2 tabstop=2
 autocmd FileType jbuilder setlocal shiftwidth=2 tabstop=2
 autocmd FileType yml setlocal shiftwidth=2 tabstop=2
+
+" Disable arrow keys
+noremap <Up> <NOP>
+noremap <Down> <NOP>
+noremap <Left> <NOP>
+noremap <Right> <NOP>
+
