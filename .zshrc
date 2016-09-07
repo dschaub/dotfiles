@@ -2,7 +2,7 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-  export ZSH=/Users/danschaub/.oh-my-zsh
+[[ -s ~/.zshrc.local ]] && source ~/.zshrc.local
 
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
@@ -84,44 +84,3 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-[[ -s /opt/boxen/env.sh ]] && source /opt/boxen/env.sh
-
-source /opt/boxen/env.d/betterment.sh
-
-alias reset-screensaver-delay="defaults write com.apple.screensaver askForPasswordDelay '0'"
-
-alias subl=subl2
-
-alias cdf='cd ~/src/better-core/retail/frontend/app'
-alias cdr='cd ~/src/better-core/retail'
-alias cdrc='cd ~/src/better-core/retail_core'
-alias cdbc='cd ~/src/better-core/broker_dealer_core'
-alias cdc='cd ~/src/better-core'
-alias cdb='cd ~/src/brochure-wp'
-alias cdw='cd ~/src/better-datawarehouse'
-
-export TOMCAT_BASE="~/my/toolbox/tomcat-6.0.18"
-export CATALINASH="$TOMCAT_BASE/bin/catalina.sh"
-
-alias tcstart="$CATALINASH start"
-alias tcrun="$CATALINASH run"
-alias tcstop="$CATALINASH stop"
-alias tcdebug="$CATALINASH jpda run"
-alias tclog="tail -f $TOMCAT_BASE/logs/catalina.out"
-
-alias clean-build="gradle clean ruby web-api:war"
-alias clean-debug="clean-build && tcdebug"
-alias clean-start="clean-build && tcrun"
-
-alias istanbul="cd ~/src/istanbul && git pull && ./run-local.sh"
-
-alias retail-log="tail -f ~/src/better-core/retail/log/development.log"
-
-alias so-fresh="pushd ~/src/better-core; ./fresh; kill-retail-connections; cdr; bundle install; rake db:reset; popd"
-
-alias kill-retail-connections="psql -c 'select pg_terminate_backend(pg_stat_activity.pid) from pg_stat_activity where pg_stat_activity.datname = '\''retail_development'\'' and pid <> pg_backend_pid()'"
-alias kill-b4b-connections="psql -c 'select pg_terminate_backend(pg_stat_activity.pid) from pg_stat_activity where pg_stat_activity.datname = '\''b4b_development'\'' and pid <> pg_backend_pid()'"
-alias kill-dataservice-connections="psql -c 'select pg_terminate_backend(pg_stat_activity.pid) from pg_stat_activity where pg_stat_activity.datname = '\''dataservice_development'\'' and pid <> pg_backend_pid()'"
-
-### Added by the Heroku Toolbelt
-export PATH="/usr/local/heroku/bin:$PATH"
