@@ -25,10 +25,6 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'itchyny/lightline.vim'
 " shows git changes to the left of line numbers
 Plugin 'airblade/vim-gitgutter'
-" buffer manager
-Plugin 'jeetsukumaran/vim-buffergator'
-" expand selections using + and -
-Plugin 'terryma/vim-expand-region'
 " semi-useful directory tree via F2
 Plugin 'scrooloose/nerdtree.git'
 " fuzzy search across all files in directory
@@ -38,26 +34,16 @@ Plugin 'JazzCore/ctrlp-cmatcher'
 Plugin 'rking/ag.vim'
 " fast multi-cursor editing
 Plugin 'terryma/vim-multiple-cursors'
-" subl-like smart completion of braces
-Plugin 'Raimondi/delimitMate'
 "Plugin 'Shougo/neocomplete.vim'
-" useful unix commands, move, remove, find, locate
-Plugin 'tpope/vim-eunuch'
-Plugin 'ReekenX/vim-rename2'
+Plugin 'wesQ3/vim-windowswap'
 
 " Syntax
-"Plugin 'jelera/vim-javascript-syntax'
-Plugin 'pangloss/vim-javascript'
-Plugin 'mxw/vim-jsx'
+Plugin 'jiangmiao/auto-pairs'
 Plugin 'elzr/vim-json'
 Plugin 'vim-ruby/vim-ruby'
 Plugin 'tpope/vim-endwise'
-Plugin 'cakebaker/scss-syntax.vim'
-Plugin 'tpope/vim-markdown'
 Plugin 'tpope/vim-rails'
-Plugin 'mustache/vim-mustache-handlebars'
 Plugin 'editorconfig/editorconfig-vim'
-Plugin 'maksimr/vim-jsbeautify'
 
 " Done configuring vundle
 call vundle#end()
@@ -190,8 +176,6 @@ endfunction
 "inoremap <expr><C-e>  neocomplete#cancel_popup()
 
 " ag search
-" bind K to grep word under cursor
-nnoremap K :Ag! "\b<C-R><C-W>\b"<CR>
 " never open first result when searching with Ag
 ca Ag Ag!
 
@@ -206,12 +190,6 @@ let g:NERDTreeMapOpenSplit = 's'
 let g:NERDTreeShowHidden = 1
 nnoremap <F2> :NERDTreeToggle<CR>
 nnoremap <F3> :NERDTreeFind<CR>
-
-" buffergator
-let g:buffergator_suppress_keymaps = 1
-nnoremap [b :BuffergatorMruCyclePrev<CR>
-nnoremap ]b :BuffergatorMruCycleNext<CR>
-nnoremap <leader>b :BuffergatorToggle<CR>
 
 " CtrlP
 let g:ctrlp_match_func = {'match' : 'matcher#cmatch'}
@@ -230,8 +208,6 @@ nmap th :tabprevious<CR>
 nmap tl :tabnext<CR>
 " faster saving
 nnoremap <leader>s :w<CR>
-" faster command entry
-nnoremap ; :
 " <Ctrl-l> redraws the screen and removes any search highlighting.
 nnoremap <silent> <C-l> :nohl<CR><C-l>
 
