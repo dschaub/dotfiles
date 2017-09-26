@@ -43,6 +43,8 @@ Plugin 'elzr/vim-json'
 Plugin 'vim-ruby/vim-ruby'
 Plugin 'tpope/vim-endwise'
 Plugin 'tpope/vim-rails'
+Plugin 'hashivim/vim-terraform'
+Plugin 'janko-m/vim-test'
 Plugin 'editorconfig/editorconfig-vim'
 
 " Done configuring vundle
@@ -201,6 +203,9 @@ let g:ctrlp_use_caching = 0
 nnoremap <leader>p :CtrlP<CR>
 nnoremap <leader>t :CtrlPTag<CR>
 
+" terraform plugin
+let g:terraform_align = 1
+
 " Custom commands
 " ===============
 " tab navigation like a boss
@@ -219,6 +224,10 @@ nmap <leader>ev :vsp <C-R>=expand('%:h').'/'<CR>
 nmap <leader>et :tabe <C-R>=expand('%:h').'/'<CR>
 
 nmap <leader>f :CtrlP <C-R>=expand('%:h').'/'<CR>
+
+" running tests
+nmap <silent> <leader>t :TestNearest<CR>
+nmap <silent> <leader>T :TestFile<CR>
 
 " remain in visual block mode after indent/outdent
 vnoremap < <gv
