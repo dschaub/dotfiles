@@ -31,7 +31,7 @@ Plugin 'scrooloose/nerdtree.git'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'JazzCore/ctrlp-cmatcher'
 " smart search within all files
-Plugin 'rking/ag.vim'
+Plugin 'mileszs/ack.vim'
 " fast multi-cursor editing
 Plugin 'terryma/vim-multiple-cursors'
 "Plugin 'Shougo/neocomplete.vim'
@@ -41,9 +41,12 @@ Plugin 'wesQ3/vim-windowswap'
 Plugin 'jiangmiao/auto-pairs'
 Plugin 'elzr/vim-json'
 Plugin 'vim-ruby/vim-ruby'
+Plugin 'lumiliet/vim-twig'
 Plugin 'tpope/vim-endwise'
 Plugin 'tpope/vim-rails'
+Plugin 'mxw/vim-jsx'
 Plugin 'hashivim/vim-terraform'
+Plugin 'ejholmes/vim-forcedotcom'
 Plugin 'janko-m/vim-test'
 Plugin 'editorconfig/editorconfig-vim'
 
@@ -179,7 +182,12 @@ endfunction
 
 " ag search
 " never open first result when searching with Ag
-ca Ag Ag!
+" ca Ag Ag!
+cnoreabbrev Ag Ack!
+
+if executable('ag')
+  let g:ackprg = 'ag --vimgrep --path-to-ignore ~/.ignore'
+endif
 
 " lightline
 let g:lightline = {
@@ -197,7 +205,7 @@ nnoremap <F3> :NERDTreeFind<CR>
 let g:ctrlp_match_func = {'match' : 'matcher#cmatch'}
 let g:ctrlp_working_path_mode = 'a'
 " use ag for file listing
-let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+let g:ctrlp_user_command = 'ag %s -l --path-to-ignore ~/.ignore --nocolor -g ""'
 " ag is fast enough that CtrlP doesn't need to cache
 let g:ctrlp_use_caching = 0
 nnoremap <leader>p :CtrlP<CR>
