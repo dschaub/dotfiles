@@ -17,7 +17,6 @@ call vundle#begin()
 Plugin 'gmarik/Vundle.vim'
 
 " Themes
-"Plugin 'altercation/vim-colors-solarized'
 
 " git helpers, mostly useful for :GBlame
 Plugin 'tpope/vim-fugitive'
@@ -32,12 +31,11 @@ Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'JazzCore/ctrlp-cmatcher'
 " smart search within all files
 Plugin 'mileszs/ack.vim'
-" fast multi-cursor editing
-Plugin 'terryma/vim-multiple-cursors'
-"Plugin 'Shougo/neocomplete.vim'
 Plugin 'wesQ3/vim-windowswap'
+Plugin 'janko-m/vim-test'
+Plugin 'editorconfig/editorconfig-vim'
 
-" Syntax
+" Syntax and languages
 Plugin 'jiangmiao/auto-pairs'
 Plugin 'elzr/vim-json'
 Plugin 'vim-ruby/vim-ruby'
@@ -47,14 +45,11 @@ Plugin 'tpope/vim-rails'
 Plugin 'mxw/vim-jsx'
 Plugin 'hashivim/vim-terraform'
 Plugin 'ejholmes/vim-forcedotcom'
-Plugin 'janko-m/vim-test'
-Plugin 'editorconfig/editorconfig-vim'
 
 " Done configuring vundle
 call vundle#end()
 " re-enable filetypes now that vundle is configured
 filetype plugin indent on
-
 
 " Appearance
 " ==========
@@ -134,12 +129,10 @@ set list
 set guifont=Menlo:h12
 set cursorline
 
-
 " Scrolling
 " =========
 " start scrolling three lines before the horizontal window border
 set scrolloff=3
-
 
 " Completion
 " ==========
@@ -155,34 +148,8 @@ set wildignore+=*coverage/*
 " Plugin config
 " =============
 
-" Neocomplete
-" Disable AutoComplPop.
-"let g:acp_enableAtStartup = 0
-" Use neocomplete.
-"let g:neocomplete#enable_at_startup = 1
-" Use smartcase.
-"let g:neocomplete#enable_smart_case = 1
-" Set minimum syntax keyword length.
-"let g:neocomplete#sources#syntax#min_keyword_length = 3
-"let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
-" <CR>: close popup and save indent.
-"inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
-function! s:my_cr_function()
-  "return neocomplete#close_popup() . "\<CR>"
-  " For no inserting <CR> key.
-  return pumvisible() ? neocomplete#close_popup() : "\<CR>"
-endfunction
-" <TAB>: completion.
-"inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-" <C-h>, <BS>: close popup and delete backword char.
-"inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
-"inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
-"inoremap <expr><C-y>  neocomplete#close_popup()
-"inoremap <expr><C-e>  neocomplete#cancel_popup()
-
-" ag search
-" never open first result when searching with Ag
-" ca Ag Ag!
+" I used to map Ag to Ag! to never open the first result
+" Then I switched to ack.vim, but muscle memory is strong
 cnoreabbrev Ag Ack!
 
 if executable('ag')
@@ -208,30 +175,27 @@ let g:ctrlp_working_path_mode = 'a'
 let g:ctrlp_user_command = 'ag %s -l --path-to-ignore ~/.ignore --nocolor -g ""'
 " ag is fast enough that CtrlP doesn't need to cache
 let g:ctrlp_use_caching = 0
+let g:ctrlp_extensions = ['tag']
 nnoremap <leader>p :CtrlP<CR>
 nnoremap <leader>t :CtrlPTag<CR>
+" jump to definition
+map <silent> <leader>jd :CtrlPTag<cr><C-\>w
 
 " terraform plugin
 let g:terraform_align = 1
 
-" Custom commands
-" ===============
-" tab navigation like a boss
+" Custom keybindings
+" ==================
+
+" tab navigation
 nmap th :tabprevious<CR>
 nmap tl :tabnext<CR>
+
 " faster saving
 nnoremap <leader>s :w<CR>
+
 " <Ctrl-l> redraws the screen and removes any search highlighting.
 nnoremap <silent> <C-l> :nohl<CR><C-l>
-
-" create a new file and open in a new tab
-" http://vimcasts.org/e/14
-nmap <leader>ew :e <C-R>=expand('%:h').'/'<CR>
-nmap <leader>es :sp <C-R>=expand('%:h').'/'<CR>
-nmap <leader>ev :vsp <C-R>=expand('%:h').'/'<CR>
-nmap <leader>et :tabe <C-R>=expand('%:h').'/'<CR>
-
-nmap <leader>f :CtrlP <C-R>=expand('%:h').'/'<CR>
 
 " running tests
 nmap <silent> <leader>t :TestNearest<CR>
@@ -240,17 +204,6 @@ nmap <silent> <leader>T :TestFile<CR>
 " remain in visual block mode after indent/outdent
 vnoremap < <gv
 vnoremap > >gv
-
-" vp doesn't replace paste buffer
-function! RestoreRegister()
-  let @" = s:restore_reg
-  return ''
-endfunction
-function! s:Repl()
-  let s:restore_reg = @"
-  return "p@=RestoreRegister()\<cr>"
-endfunction
-vmap <silent> <expr> p <sid>Repl()
 
 " automatically strip whitespace on save
 autocmd BufWritePre * :%s/\s\+$//e
@@ -267,4 +220,3 @@ noremap <Up> <NOP>
 noremap <Down> <NOP>
 noremap <Left> <NOP>
 noremap <Right> <NOP>
-
