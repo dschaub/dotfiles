@@ -26,6 +26,9 @@ Plugin 'itchyny/lightline.vim'
 Plugin 'airblade/vim-gitgutter'
 " semi-useful directory tree via F2
 Plugin 'scrooloose/nerdtree.git'
+Plugin 'tpope/vim-surround'
+Plugin 'tpope/vim-commentary'
+Plugin 'tpope/vim-repeat'
 " fuzzy search across all files in directory
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'JazzCore/ctrlp-cmatcher'
@@ -39,6 +42,8 @@ Plugin 'editorconfig/editorconfig-vim'
 Plugin 'jiangmiao/auto-pairs'
 Plugin 'elzr/vim-json'
 Plugin 'vim-ruby/vim-ruby'
+Plugin 'StanAngeloff/php.vim'
+Plugin '2072/PHP-Indenting-for-VIm'
 Plugin 'lumiliet/vim-twig'
 Plugin 'tpope/vim-endwise'
 Plugin 'tpope/vim-rails'
@@ -168,6 +173,14 @@ let g:NERDTreeShowHidden = 1
 nnoremap <F2> :NERDTreeToggle<CR>
 nnoremap <F3> :NERDTreeFind<CR>
 
+" nerd commentary
+" Add spaces after comment delimiters by default
+let g:NERDSpaceDelims = 1
+" Allow commenting and inverting empty lines (useful when commenting a region)
+let g:NERDCommentEmptyLines = 1
+" Enable trimming of trailing whitespace when uncommenting
+let g:NERDTrimTrailingWhitespace = 1
+
 " CtrlP
 let g:ctrlp_match_func = {'match' : 'matcher#cmatch'}
 let g:ctrlp_working_path_mode = 'a'
@@ -194,8 +207,8 @@ nmap tl :tabnext<CR>
 " faster saving
 nnoremap <leader>s :w<CR>
 
-" <Ctrl-l> redraws the screen and removes any search highlighting.
-nnoremap <silent> <C-l> :nohl<CR><C-l>
+" <Ctrl-n> redraws the screen and removes any search highlighting.
+nnoremap <silent> <C-n> :nohl<CR>
 
 " running tests
 nmap <silent> <leader>t :TestNearest<CR>
