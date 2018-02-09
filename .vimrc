@@ -50,6 +50,11 @@ Plugin 'tpope/vim-rails'
 Plugin 'mxw/vim-jsx'
 Plugin 'hashivim/vim-terraform'
 Plugin 'ejholmes/vim-forcedotcom'
+Plugin 'fatih/vim-go'
+Plugin 'pangloss/vim-javascript'
+Plugin 'mxw/vim-jsx'
+Plugin 'janko-m/vim-test'
+Plugin 'editorconfig/editorconfig-vim'
 
 " Done configuring vundle
 call vundle#end()
@@ -197,10 +202,12 @@ map <silent> <leader>jd :CtrlPTag<cr><C-\>w
 " terraform plugin
 let g:terraform_align = 1
 
-" Custom keybindings
-" ==================
+" jsx in .js files
+let g:jsx_ext_required = 0
 
-" tab navigation
+" Custom commands
+" ===============
+" tab navigation like a boss
 nmap th :tabprevious<CR>
 nmap tl :tabnext<CR>
 
