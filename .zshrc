@@ -51,7 +51,7 @@ ZSH_THEME="danster"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git rails bundler)
+plugins=(git rails bundler zsh-autosuggestions)
 
 source $ZSH/oh-my-zsh.sh
 
