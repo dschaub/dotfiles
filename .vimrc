@@ -190,9 +190,6 @@ nnoremap <leader>t :CtrlPTag<CR>
 " jump to definition
 map <silent> <leader>jd :CtrlPTag<cr><C-\>w
 
-" terraform plugin
-let g:terraform_align = 1
-
 " jsx in .js files
 let g:jsx_ext_required = 0
 
