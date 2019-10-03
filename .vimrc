@@ -24,7 +24,6 @@ Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-repeat'
 " fuzzy search across all files in directory
 Plug 'ctrlpvim/ctrlp.vim'
-Plug 'JazzCore/ctrlp-cmatcher'
 " smart search within all files
 Plug 'mileszs/ack.vim'
 Plug 'wesQ3/vim-windowswap'
@@ -161,7 +160,6 @@ nnoremap <F2> :NERDTreeToggle<CR>
 nnoremap <F3> :NERDTreeFind<CR>
 
 " CtrlP
-let g:ctrlp_match_func = {'match' : 'matcher#cmatch'}
 let g:ctrlp_working_path_mode = 'a'
 " use ag for file listing
 let g:ctrlp_user_command = 'ag %s -l --path-to-ignore ~/.ignore --nocolor -g ""'
