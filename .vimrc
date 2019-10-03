@@ -6,51 +6,42 @@ set nocompatible
 
 " Plugin config
 " =============
-" setup Vundle for package management
-
-" turn off filetype temporarily for vundle configuration
-filetype off
-set rtp+=~/.vim/bundle/Vundle.vim/
-call vundle#begin()
+call plug#begin('~/.vim/plugged')
 
 " let Vundle manage Vundle
-Plugin 'gmarik/Vundle.vim'
-
-" Themes
+Plug 'gmarik/Vundle.vim'
 
 " git helpers, mostly useful for :GBlame
-Plugin 'tpope/vim-fugitive'
+Plug 'tpope/vim-fugitive'
 " sexy stylish status line
-Plugin 'itchyny/lightline.vim'
+Plug 'itchyny/lightline.vim'
 " shows git changes to the left of line numbers
-Plugin 'airblade/vim-gitgutter'
+Plug 'airblade/vim-gitgutter'
 " semi-useful directory tree via F2
-Plugin 'scrooloose/nerdtree.git'
-Plugin 'tpope/vim-surround'
-Plugin 'tpope/vim-commentary'
-Plugin 'tpope/vim-repeat'
+Plug 'scrooloose/nerdtree'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-repeat'
 " fuzzy search across all files in directory
-Plugin 'ctrlpvim/ctrlp.vim'
-Plugin 'JazzCore/ctrlp-cmatcher'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'JazzCore/ctrlp-cmatcher'
 " smart search within all files
-Plugin 'mileszs/ack.vim'
-Plugin 'wesQ3/vim-windowswap'
-Plugin 'janko-m/vim-test'
-Plugin 'editorconfig/editorconfig-vim'
+Plug 'mileszs/ack.vim'
+Plug 'wesQ3/vim-windowswap'
+Plug 'janko-m/vim-test'
+Plug 'editorconfig/editorconfig-vim'
 
 " Syntax and languages
-Plugin 'jiangmiao/auto-pairs'
-Plugin 'elzr/vim-json'
-Plugin 'vim-ruby/vim-ruby'
-Plugin 'tpope/vim-endwise'
-Plugin 'tpope/vim-rails'
-Plugin 'mxw/vim-jsx'
-Plugin 'pangloss/vim-javascript'
+Plug 'jiangmiao/auto-pairs'
+Plug 'elzr/vim-json'
+Plug 'vim-ruby/vim-ruby'
+Plug 'tpope/vim-endwise'
+Plug 'tpope/vim-rails'
+Plug 'mxw/vim-jsx'
+Plug 'pangloss/vim-javascript'
 
-" Done configuring vundle
-call vundle#end()
-" re-enable filetypes now that vundle is configured
-filetype plugin indent on
+" Done configuring plugins
+call plug#end()
 
 " Appearance
 " ==========
