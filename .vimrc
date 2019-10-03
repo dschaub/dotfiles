@@ -160,14 +160,6 @@ let g:NERDTreeShowHidden = 1
 nnoremap <F2> :NERDTreeToggle<CR>
 nnoremap <F3> :NERDTreeFind<CR>
 
-" nerd commentary
-" Add spaces after comment delimiters by default
-let g:NERDSpaceDelims = 1
-" Allow commenting and inverting empty lines (useful when commenting a region)
-let g:NERDCommentEmptyLines = 1
-" Enable trimming of trailing whitespace when uncommenting
-let g:NERDTrimTrailingWhitespace = 1
-
 " CtrlP
 let g:ctrlp_match_func = {'match' : 'matcher#cmatch'}
 let g:ctrlp_working_path_mode = 'a'
