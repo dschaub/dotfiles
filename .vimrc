@@ -8,9 +8,6 @@ set nocompatible
 " =============
 call plug#begin('~/.vim/plugged')
 
-" let Vundle manage Vundle
-Plug 'gmarik/Vundle.vim'
-
 " git helpers, mostly useful for :GBlame
 Plug 'tpope/vim-fugitive'
 " sexy stylish status line
@@ -36,8 +33,11 @@ Plug 'elzr/vim-json'
 Plug 'vim-ruby/vim-ruby'
 Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-rails'
-Plug 'mxw/vim-jsx'
-Plug 'pangloss/vim-javascript'
+Plug 'leafgarland/typescript-vim'
+Plug 'peitalin/vim-jsx-typescript'
+
+Plug 'christoomey/vim-tmux-navigator'
+Plug 'tpope/vim-dispatch'
 
 " Done configuring plugins
 call plug#end()
@@ -90,6 +90,12 @@ set undodir=~/.vim/undo
 
 " Mouse Config
 " ============
+if has("mouse_sgr")
+    set ttymouse=sgr
+else
+    set ttymouse=xterm2
+endif
+
 set mouse=a     " Enable mouse in all modes
 
 
@@ -117,7 +123,7 @@ set nowrap
 set lcs=tab:▸\ ,trail:·,nbsp:_
 set list
 
-set guifont=Menlo:h12
+set guifont=Menlo:h11
 set cursorline
 
 " Scrolling
@@ -171,8 +177,8 @@ nnoremap <leader>t :CtrlPTag<CR>
 " jump to definition
 map <silent> <leader>jd :CtrlPTag<cr><C-\>w
 
-" jsx in .js files
-let g:jsx_ext_required = 0
+" use dispatch for testing
+let test#strategy = "vimterminal"
 
 " Custom commands
 " ===============
@@ -204,8 +210,16 @@ autocmd BufRead,BufNewFile *.rb,*.rake,Rakefile,Gemfile,*.scss,*.jbuilder,*.yml 
 autocmd FileType jbuilder setlocal shiftwidth=2 tabstop=2
 autocmd FileType yml setlocal shiftwidth=2 tabstop=2
 
+com! FormatJson %!python -m json.tool
+
 " Disable arrow keys
 noremap <Up> <NOP>
 noremap <Down> <NOP>
 noremap <Left> <NOP>
 noremap <Right> <NOP>
+
+" Easier split navigation
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
