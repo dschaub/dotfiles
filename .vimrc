@@ -38,6 +38,7 @@ Plug 'peitalin/vim-jsx-typescript'
 
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'tpope/vim-dispatch'
+Plug 'benmills/vimux'
 
 " Done configuring plugins
 call plug#end()
@@ -178,7 +179,7 @@ nnoremap <leader>t :CtrlPTag<CR>
 map <silent> <leader>jd :CtrlPTag<cr><C-\>w
 
 " use dispatch for testing
-let test#strategy = "vimterminal"
+let test#strategy = "vimux"
 
 " Custom commands
 " ===============
